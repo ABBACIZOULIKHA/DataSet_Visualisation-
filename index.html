@@ -16,6 +16,77 @@
       align-items: center;
       background: linear-gradient(120deg, #f6f7f9, #eef2f3);
       color: #333;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+  
+    /* Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #121212;
+        color: #e0e0e0;
+      }
+  
+      h1 {
+        color: #bb86fc;
+      }
+  
+      .chart {
+        background: #333;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      }
+  
+      .bar {
+        fill: #6200ea;
+      }
+  
+      .bar:hover {
+        fill: #bb86fc;
+      }
+  
+      .tooltip {
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid #444;
+        color: #e0e0e0;
+      }
+  
+      .details {
+        background: #333;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+      }
+  
+      .details h3 {
+        color: #bb86fc;
+      }
+  
+      .details table th {
+        background: #444;
+        color: #bb86fc;
+      }
+  
+      .details table td {
+        background: #555;
+        color: #e0e0e0;
+      }
+  
+      .details .references h4 {
+        color: #bb86fc;
+      }
+  
+      .details .references ul li a {
+        color: #bb86fc;
+      }
+  
+      .details .references ul li a:hover {
+        text-decoration: underline;
+      }
+  
+      .x-axis text {
+        fill: #bbb;
+      }
+  
+      .y-axis text {
+        fill: #bbb;
+      }
     }
   
     /* Title Styling */
@@ -27,6 +98,7 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       font-weight: 600;
+      transition: color 0.3s ease;
     }
   
     /* Chart Area Styling */
@@ -39,6 +111,7 @@
       max-width: 1100px;
       width: 90%;
       position: relative;
+      transition: background 0.3s ease;
     }
   
     /* Bar Styling */
@@ -50,7 +123,6 @@
   
     .bar:hover {
       fill: #ff9800;
-      transform: scale(1.05);
     }
   
     /* Tooltip Styling */
@@ -66,6 +138,7 @@
       color: #333;
       max-width: 250px;
       word-wrap: break-word;
+      transition: background 0.3s ease, color 0.3s ease;
     }
   
     /* Details Panel Styling */
@@ -79,6 +152,7 @@
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
       text-align: left;
       display: none;
+      transition: background 0.3s ease;
     }
   
     /* Title inside Details Panel */
@@ -87,6 +161,7 @@
       color: #4a90e2;
       font-weight: 600;
       margin-bottom: 20px;
+      transition: color 0.3s ease;
     }
   
     /* Table Styling inside Details */
@@ -126,6 +201,7 @@
       font-size: 1.4em;
       color: #4a90e2;
       margin-bottom: 15px;
+      transition: color 0.3s ease;
     }
   
     .details .references ul {
@@ -142,6 +218,7 @@
       color: #4a90e2;
       text-decoration: none;
       font-weight: 500;
+      transition: color 0.3s ease;
     }
   
     .details .references ul li a:hover {
@@ -153,6 +230,7 @@
       font-size: 14px;
       fill: #555;
       font-weight: 400;
+      transition: fill 0.3s ease;
     }
   
     /* Styling for Y-axis labels */
@@ -160,6 +238,7 @@
       font-size: 14px;
       fill: #555;
       font-weight: 400;
+      transition: fill 0.3s ease;
     }
   
     /* Responsive Design */
@@ -284,6 +363,7 @@
             `<table>
               <tr><th>Key</th><th>Value</th></tr>
               <tr><td>Size</td><td>${d.Size || "N/A"}</td></tr>
+              <tr><td>Link</td><td><a href = "${d.Link || "N/A"}">${d.Link || "N/A"}</a></td></tr>
               <tr><td>Number of Citations</td><td>${d.NbCitations}</td></tr>
               <tr><td>Goals</td><td>${Array.isArray(d.Goal) ? d.Goal.join(", ") : d.Goal || "N/A"}</td></tr>
               <tr><td>Country</td><td>${d.Country || "N/A"}</td></tr>
