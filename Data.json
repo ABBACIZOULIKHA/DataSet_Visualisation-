@@ -1,0 +1,272 @@
+{
+    "DiseaseClassification": [
+      {
+        "Dataset": "Wheat Leaf Dataset",
+        "NbCitations": 78,
+        "Goal": [
+              "detection" , "classification"
+        ],
+        "Size": "1.41 GB (407 images)",
+        "Source": "Mendeley Data",
+        "Country": "Ethiopia",
+        "ImageType": "RGB",
+        "Classes": {
+          "HealthyWheatLeaf": 102,
+          "StripeRust": 208,
+          "SeptoriaDisease": 97
+        },
+        "References": [
+          {"Article 01": "https://ieeexplore.ieee.org/abstract/document/10521470/references#references"},
+          {"Article 02": "https://www.mdpi.com/2076-3"},
+          {"Article 03": "https://ieeexplore.ieee.org/abstract/document/10756655/metrics#metrics"}
+         ],
+        "Link": "https://data.mendeley.com/datasets/wgd66f8n6h/1"
+      },
+      {
+        "Dataset": "Plant Village dataset",
+        "NbCitations": 15,
+        "ImageType": "RGB",
+        "Links": [
+          {"Link": "https://www.kaggle.com/datasets/abdulkadirbayero/plant-village-dataset", "Classes": 39, "Size": "865MB"},
+          {"Link": "https://www.tensorflow.org/datasets/catalog/plant_village?hl=fr", "Classes": 38, "Size": "827.82 MB"},
+          {"Link": "https://datasets.activeloop.ai/docs/ml/datasets/plantvillage-dataset/", "Classes": 39, "Size": "61486 images"},
+          {"Link": "https://www.kaggle.com/datasets/arjuntejaswi/plant-village", "Classes": 15, "Size": "344 MB"},
+          {"Link": "https://zenodo.org/records/1204914", "Size": "824.2 MB"}
+        ],
+        "References": [
+          {"Article 01": "https://www.mdpi.com/2072-4292/14/14/3446"},
+          {"Article 02": "https://www.mdpi.com/2076-3417/13/9/5801"},
+          {"Article 03": "https://arxiv.org/abs/1511.08060"},
+          {"Article 04": "https://www.sciencedirect.com/science/article/abs/pii/S0168169920302544"},
+          {"Article 05": "https://ieeexplore.ieee.org/abstract/document/10214583"}
+
+        ],
+        "Goal": "classification"
+      },
+      {
+        "Dataset": "Wheat Leaf Rust Dataset",
+        "NbCitations": 2,
+        "Goal": ["Detection","Classification"],
+        "Size": "8.68 GB (532 images)",
+        "Source": "Science Data Bank",
+        "Link":"https://www.scidb.cn/en/detail?dataSetId=557575356182167552#p2",
+        "Country": "China (Hebei, Shanxi, Inner Mongolia, Henan, Shandong, Guizhou, Yunnan, Heilongjiang, Jilin)",
+        "ImageType": "RGB",
+        "Classes": ["HealthyWheatLeaf", "WheatLeafRust","WheatStalkRust"],
+        "Author": "chenlei@iim.ac.cn",
+        "References": [
+          {"Article 01": "https://ieeexplore.ieee.org/abstract/document/10041575"}
+        ],
+        "PBs": "Pictures are not organized into classes; credit of the author on the image; rust is a type of wheat disease"
+      },
+      {
+        "Dataset": "Field-based Wheat Diseases Images (FWDI)",
+        "NbCitations": 7,
+        "Size": "2643 images",
+        "Source": "Mendeley Data",
+        "Country": "Ethiopia",
+        "ImageType": "RGB",
+        "Classes": {
+          "HealthyWheatLeaf": 259,
+          "PowderyMildew": 561,
+          "LeafRust": 808,
+          "StripeRust": 1015
+        },
+        "References": [
+          {"Article 01": "https://www.mdpi.com/2072-4292/14/14/3446"}
+        ],
+        "Goal": ["Classification","Detection"],
+        "PBs": "Not available"
+      },
+      {
+        "Dataset": "Powdery Mildew Wheat Disease Dataset",
+        "NbCitations": 2,
+        "Link":"https://www.scidb.cn/en/detail?dataSetId=557575344966598656",
+        "Size": "10.03 GB (462 images)",
+        "Country": "China (Shandong, Sichuan, Guizhou, Yunnan, Northeast China, North China, Northwest China)",
+        "ImageType": "RGB",
+        "References": [
+            {"Article 01": "https://ieeexplore.ieee.org/abstract/document/9396972"}
+          ],  
+        "Classes": "Powdery mildew wheat dataset",
+        "Goal": ["Detection ","classification"]
+      },
+      {
+        "Dataset": "Wheat Disease Detection Dataset",
+        "NbCitations": 2,
+        "ImageType": "RGB",
+        "Goal": ["Detection","Classification"],
+        "Size": "2400 images (507MB)",
+        "References": [
+            {"Article 01": "https://www.sciencedirect.com/science/article/abs/pii/S0026265X23014091"},
+            {"Article 02": "https://www.sciencedirect.com/science/article/abs/pii/S0167739X23002388"}
+        ],
+        "Classes": {
+          "Healthy": 1116,
+          "YellowRust": 924,
+          "BrownRust": 902
+        }
+        
+      },
+      {
+        "Dataset": "Wheat Disease dataset 2017 (WDD2017)",
+        "NbCitations": 48,
+        "Goal": ["Detection","Classification"],
+        "Size": "2GB",
+        "Link":"https://www.kaggle.com/datasets/amankumar2004/wheat-disease-dataset",
+        "ImageType": "RGB",
+        "References": [
+            {"Article 01": "https://www.sciencedirect.com/science/article/abs/pii/S0168169917305999"},
+            {"Article 02": "https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=Combined+CNN+with+STARGAN+for+wheat+yellow+rust+disease+classification.&btnG=https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=Combined+CNN+with+STARGAN+for+wheat+yellow+rust+disease+classification.&btnG="}
+        ],
+        "Classes": {
+          "Brown_Rust": 166,
+          "Healthy": 242,
+          "Loose_Smut": 99 ,
+          "Septoria":34,
+          "Yellow_Rust":195
+        }
+      },
+      {
+        "Dataset": "Plant Leaf Disease Detection Using Deep Learning - A Multi-Dataset Approach (Web sourced Dataset)",
+        "NbCitations": 1,
+        "Link":"https://zenodo.org/records/14051480",
+        "Goal": ["Detection","Classification"],
+        "Size": "564.9 MB",
+        "ImageType": "RGB",
+        "References": [
+            {"Article 01": "https://scholar.google.com/scholar?hl=fr&as_sdt=0%2C5&as_vis=1&q=Plant+Leaf+Disease+Detection+Using+Deep+Learning+-+A+Multi-Dataset+Approach&btnG="}
+        ],
+        "PBs":"Wheat is not there in the dataset"
+      },{
+        "Dataset": "Wheat Fungi Diseases dataset (WFD2020)",
+        "Link": "http://wfd.sysbio.ru/",
+        "NbCitations": 26,
+        "ImageType": "RGB",
+        "Goal": ["Detection","Classification"],
+        "Size": "2414 images",
+        "References": [
+            {"Article 01": "https://ieeexplore.ieee.org/abstract/document/10142846"},
+            {"Article 02": "https://www.mdpi.com/2223-7747/10/8/1500"},
+            {"Article 03": "https://ieeexplore.ieee.org/abstract/document/10714622"},
+            {"Article 04": "https://www.sciencedirect.com/science/article/abs/pii/S1574954123000973"},
+            {"Article 05": "https://ieeexplore.ieee.org/abstract/document/10170091"}
+
+        ],
+        "Classes": ["Healthy","Leaf Rust","Stripe Rust","Powdery Mildew","Septoria"],
+        "PBs":"Not available"
+      },{
+        "Dataset": "wheat yellow rust dataset (YELLOW-RUST-19)",
+        "NbCitations": 19,
+        "Country":"Turkey",
+        "ImageType":"RGB" ,
+        "Goal": ["Detection","Classification"],
+        "References": [
+            {"Article 01": "https://ieeexplore.ieee.org/abstract/document/10063855/"},
+            {"Article 02": "https://ieeexplore.ieee.org/abstract/document/10389846"},
+            {"Article 03": "https://arxiv.org/abs/2407.19617"},
+            {"Article 04": "https://www.sciencedirect.com/science/article/abs/pii/S0026265X23014091"},
+            {"Article 05": "https://link.springer.com/article/10.1007/s11042-023-15199-y"},
+            {"Article 06": "https://link.springer.com/article/10.1007/s42161-021-00886-2"},
+            {"Article 07": "https://www.mdpi.com/2076-3417/13/17/9987"},
+            {"Article 08": "https://publications.eai.eu/index.php/IoT/article/view/4603"},
+            {"Article 09": "https://ieeexplore.ieee.org/abstract/document/10760429"},
+            {"Article 10": "https://ieeexplore.ieee.org/abstract/document/10541263"}
+        ],
+        "Size": "2 GB (15000 images)",
+        "Classes": "YellowRust"
+      },{
+        "Dataset": "LWDCD2020(Large Wheat Disease Classification Dataset)",
+        "NbCitations": 17,
+        "Goal": ["Detection","Classification"],
+        "ImageType":"RGB" ,
+        "References": [
+            {"Article 01": "https://www.sciencedirect.com/science/article/pii/S2352914821001313"},
+            {"Article 02": "https://www.mdpi.com/2624-7402/6/3/117"},
+            {"Article 03": "https://www.mdpi.com/2076-3417/13/9/5801"},
+            {"Article 04": "https://ieeexplore.ieee.org/abstract/document/10756655"}
+        ],
+        "Classes": ["crown androot rot","Fusarieum Head blight","Healthy ","Leaf rust"],
+        "PBs":"in the articles mentioned that this dataset contains 12,000 images of nine classes of wheat diseases and one normal class. But we just found link drive contain 4 classes."  
+      },{
+        "Dataset": "Global Wheat Head Dataset 2021(GWHD)",
+        "NbCitations": 46,
+        "ImageType":"RGB" ,
+        "Link":"https://zenodo.org/records/5092309",
+        "References": [
+            {"Article 01": "https://arxiv.org/pdf/2105.07660"},
+            {"Article 02": "https://spj.science.org/doi/full/10.34133/plantphenomics.0059"},
+            {"Article 03": "https://dl.acm.org/doi/abs/10.1145/3477314.3507190"},
+            {"Article 04": "https://ieeexplore.ieee.org/abstract/document/10752099"},
+            {"Article 05": "https://www.mdpi.com/2073-4395/14/9/1936"},
+            {"Article 06": "https://arxiv.org/abs/2105.06182"},
+            {"Article 07": "https://www.mdpi.com/2072-4292/15/15/3770"},
+            {"Article 08": "https://openreview.net/forum?id=fEoYkscKoS"},
+            {"Article 09": "https://www.mdpi.com/2077-0472/14/2/327"},
+            {"Article 10": "https://openaccess.thecvf.com/content/ICCV2021W/CVPPA/papers/Liu_Dynamic_Color_Transform_for_Wheat_Head_Detection_ICCVW_2021_paper.pdf"},
+            {"Article 11": "https://www.sciencedirect.com/science/article/abs/pii/S016816992400663X"},
+            {"Article 12": "https://www.mdpi.com/2077-0472/14/6/961"}
+        ],
+        "Country":"11 countries (Europe, Canada, North America, Asia, Oceania, and Africa)",
+        "Goal": ["Detection","Classification"],
+        "Size": "10.2 GB (6000 images)",
+        "Classes":"Bounding boxes for wheat head detection"
+    },{
+        "Dataset": "Winter Wheat Leaf Images Dataset",
+        "Link":"https://data.mendeley.com/datasets/gj72pjfvb2/1",
+        "NbCitations": 3,
+        "ImageType":"RGB" ,
+        "Country":"Jaipur district (Rajasthan, India)",
+        "Goal": ["Detection","Classification"],
+        "References": [
+            {"Article 01": "https://link.springer.com/chapter/10.1007/978-981-99-3878-0_63"}
+        ],
+        "Size": "7.53 GB (1081 images)"
+    },{
+        "Dataset": "Wheat Plant Diseases Dataset",
+        "Link":"https://www.kaggle.com/datasets/kushagra3204/wheat-plant-diseases/discussion?sort=hotness",
+        "NbCitations": 1,
+        "ImageType":"RGB" ,
+        "Goal": "Classification",
+        "Size": "7GB" ,
+        "References": [
+            {"Article 01": "https://sciencesforce.com/index.php/oia/article/view/257"}
+        ],
+        "Classes": {
+          "aphid":973 ,
+          "black_rust":646,
+          "blast":717,
+          "brown_rust": 1341,
+          "common_root_rot": 684,
+          "fusarium_head_blight": 681,
+          "healthy": 1070 ,
+          "leaf_blight": 912 , 
+          "mildew":1151 ,
+          "mite": 870 ,
+          "septoria": 1214 ,
+          "smut": 1380 ,
+          "stem_fly": 304 ,
+          "tan_spot": 840 ,
+          "yellow_rust":1371 
+        }
+    },{
+        "Dataset": "CGIAR",
+        "Link":"https://www.kaggle.com/datasets/shadabhussain/cgiar-computer-vision-for-crop-disease?select=train",
+        "NbCitations": 40,
+        "ImageType":"RGB" ,
+        "References": [
+            {"Article 01": "https://www.mdpi.com/2076-3417/13/9/5801"},
+            {"Article 02": "https://ieeexplore.ieee.org/abstract/document/9596133"},
+            {"Article 03": "https://ieeexplore.ieee.org/abstract/document/9445266"},
+            {"Article 04": "https://ieeexplore.ieee.org/abstract/document/10214583"},
+            {"Article 05": "https://www.mdpi.com/2223-7747/10/8/1500"},
+            {"Article 06": "https://www.mdpi.com/2624-7402/6/3/117"},
+            {"Article 07": "https://ieeexplore.ieee.org/abstract/document/10756655"}
+        ],
+        "Goal": ["Detection"]
+    }
+    
+    ]
+  }
+  
+ 

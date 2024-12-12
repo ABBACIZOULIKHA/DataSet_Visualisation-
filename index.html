@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horizontal Bar Chart Visualization</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    /* General Body Styling */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(120deg, #f6f7f9, #eef2f3);
+      color: #333;
+    }
+  
+    /* Title Styling */
+    h1 {
+      font-size: 2.8em;
+      color: #4a90e2;
+      margin-top: 40px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+  
+    /* Chart Area Styling */
+    .chart {
+      margin: 40px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      max-width: 1100px;
+      width: 90%;
+      position: relative;
+    }
+  
+    /* Bar Styling */
+    .bar {
+      fill: #4a90e2;
+      transition: fill 0.3s ease, transform 0.2s ease;
+      border-radius: 5px;
+    }
+  
+    .bar:hover {
+      fill: #ff9800;
+      transform: scale(1.05);
+    }
+  
+    /* Tooltip Styling */
+    .tooltip {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #ddd;
+      padding: 12px;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      pointer-events: none;
+      font-size: 14px;
+      color: #333;
+      max-width: 250px;
+      word-wrap: break-word;
+    }
+  
+    /* Details Panel Styling */
+    .details {
+      width: 80%;
+      max-width: 900px;
+      margin-top: 40px;
+      padding: 25px;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      text-align: left;
+      display: none;
+    }
+  
+    /* Title inside Details Panel */
+    .details h3 {
+      font-size: 1.6em;
+      color: #4a90e2;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  
+    /* Table Styling inside Details */
+    .details table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  
+    .details table th,
+    .details table td {
+      border: 1px solid #ddd;
+      padding: 12px 18px;
+      text-align: left;
+      font-size: 14px;
+    }
+  
+    .details table th {
+      background: #f6f7f9;
+      color: #4a90e2;
+      font-weight: 500;
+    }
+  
+    .details table td {
+      background: #fff;
+      color: #555;
+    }
+  
+    /* References Section inside Details */
+    .details .references {
+      margin-top: 25px;
+    }
+  
+    .details .references h4 {
+      font-size: 1.4em;
+      color: #4a90e2;
+      margin-bottom: 15px;
+    }
+  
+    .details .references ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+  
+    .details .references ul li {
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+  
+    .details .references ul li a {
+      color: #4a90e2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  
+    .details .references ul li a:hover {
+      text-decoration: underline;
+    }
+  
+    /* Styling for X-axis labels */
+    .x-axis text {
+      font-size: 14px;
+      fill: #555;
+      font-weight: 400;
+    }
+  
+    /* Styling for Y-axis labels */
+    .y-axis text {
+      font-size: 14px;
+      fill: #555;
+      font-weight: 400;
+    }
+  
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2em;
+        margin-top: 30px;
+      }
+  
+      .chart {
+        width: 100%;
+        margin: 20px;
+        padding: 20px;
+      }
+  
+      .details {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8em;
+        margin-top: 20px;
+      }
+  
+      .chart {
+        width: 100%;
+        padding: 15px;
+      }
+  
+      .details {
+        padding: 15px;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+  <h1>Dataset Citation Analysis</h1>
+  <div id="chart" class="chart"></div>
+  <div id="tooltip" class="tooltip" style="opacity: 0;"></div>
+  <div id="details" class="details" style="display: none;"></div>
+
+  <script>
+    // Dimensions and margins
+    const margin = { top: 20, right: 30, bottom: 50, left: 200 };
+    const width = 1000 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
+
+    // Create SVG container
+    const svg = d3.select("#chart")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const tooltip = d3.select("#tooltip");
+    const details = d3.select("#details");
+
+    // Load data from JSON file
+    d3.json("Data.json").then(data => {
+      const dataset = data.DiseaseClassification;
+
+      // Scales
+      const y = d3.scaleBand()
+        .domain(dataset.map(d => d.Dataset))
+        .range([0, height])
+        .padding(0.1);
+
+      const x = d3.scaleLinear()
+        .domain([0, d3.max(dataset, d => d.NbCitations)])
+        .nice()
+        .range([0, width]);
+
+      // Y-axis
+      svg.append("g")
+        .attr("class", "y-axis")
+        .call(d3.axisLeft(y));
+
+      // X-axis
+      svg.append("g")
+        .attr("class", "x-axis")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x));
+
+      // Bars
+      svg.selectAll(".bar")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("y", d => y(d.Dataset))
+        .attr("x", 0)
+        .attr("width", d => x(d.NbCitations))
+        .attr("height", y.bandwidth())
+        .on("mouseover", function (event, d) {
+          d3.select(this).style("fill", "#ff9800");
+          tooltip.transition().duration(200).style("opacity", 1);
+          tooltip.html(
+            `<strong>${d.Dataset}</strong><br>Size: ${d.Size || "N/A"}<br>Classes: ${JSON.stringify(d.Classes || "N/A")}`
+          )
+            .style("left", `${event.pageX + 10}px`)
+            .style("top", `${event.pageY + 10}px`);
+        })
+        .on("mousemove", function (event) {
+          tooltip.style("left", `${event.pageX + 10}px`).style("top", `${event.pageY + 10}px`);
+        })
+        .on("mouseout", function () {
+          d3.select(this).style("fill", "#4a90e2");
+          tooltip.transition().duration(200).style("opacity", 0);
+        })
+        .on("click", function (event, d) {
+          details.style("display", "block");
+          const references = d.References?.map(ref => {
+    const articleLink = Object.values(ref)[0]; // Extracts the value (URL)
+    return `<li><a href="${articleLink}" target="_blank">${articleLink}</a></li>`; }).join("") || "N/A";
+          details.html(
+            `<h3>${d.Dataset}</h3>` +
+            `<table>
+              <tr><th>Key</th><th>Value</th></tr>
+              <tr><td>Size</td><td>${d.Size || "N/A"}</td></tr>
+              <tr><td>Number of Citations</td><td>${d.NbCitations}</td></tr>
+              <tr><td>Goals</td><td>${Array.isArray(d.Goal) ? d.Goal.join(", ") : d.Goal || "N/A"}</td></tr>
+              <tr><td>Country</td><td>${d.Country || "N/A"}</td></tr>
+              <tr><td>Classes</td><td>${typeof d.Classes === "object" ? Object.entries(d.Classes).map(([key, value]) => `${key}: ${value}`).join("<br>") : d.Classes || "N/A"}</td></tr>
+              <tr><td>Source</td><td>${d.Source || "N/A"}</td></tr>
+            </table>` +
+            `<div class="references">
+              <h4>References</h4>
+              <ul>${references}</ul>
+            </div>`
+          );
+        });
+
+      // Labels
+      svg.selectAll(".label")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .attr("class", "label")
+        .attr("y", d => y(d.Dataset) + y.bandwidth() / 2)
+        .attr("x", d => x(d.NbCitations) + 5)
+        .attr("text-anchor", "start")
+        .attr("alignment-baseline", "middle")
+        .text(d => d.NbCitations);
+    }).catch(error => {
+      console.error("Error loading the data: ", error);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+// ,{
+//     "Dataset": "COCO dataset",
+//     "Link":"https://data.mendeley.com/datasets/gj72pjfvb2/1",
+//     "NbCitations": 621,
+//     "ImageType":"RGB" ,
+//     "Goal": ["Detection"],
+//     "Size": ":330,000 images, 200,000 of which have annotations for object detection, segmentation and subtitling tasks.",
+//     "Classes":"80 catégories"
+// }
