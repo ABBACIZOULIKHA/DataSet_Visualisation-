@@ -26,6 +26,9 @@
         "Dataset": "Plant Village dataset",
         "NbCitations": 15,
         "ImageType": "RGB",
+        "Size":"865MB",
+        "Classes":"39 different plant diseases.",
+        "Link":"https://www.kaggle.com/datasets/abdulkadirbayero/plant-village-dataset",
         "Links": [
           {"Link": "https://www.kaggle.com/datasets/abdulkadirbayero/plant-village-dataset", "Classes": 39, "Size": "865MB"},
           {"Link": "https://www.tensorflow.org/datasets/catalog/plant_village?hl=fr", "Classes": 38, "Size": "827.82 MB"},
@@ -95,6 +98,7 @@
         "Dataset": "Wheat Disease Detection Dataset",
         "NbCitations": 2,
         "ImageType": "RGB",
+        "Link":"https://www.kaggle.com/datasets/sinadunk23/behzad-safari-jalal",
         "Goal": ["Detection","Classification"],
         "Size": "2400 images (507MB)",
         "References": [
@@ -159,6 +163,7 @@
         "Dataset": "wheat yellow rust dataset (YELLOW-RUST-19)",
         "NbCitations": 19,
         "Country":"Turkey",
+        "Link":"https://www.kaggle.com/datasets/tolgahayit/yellowrust19-yellow-rust-disease-in-wheat",
         "ImageType":"RGB" ,
         "Goal": ["Detection","Classification"],
         "References": [
@@ -180,6 +185,7 @@
         "NbCitations": 17,
         "Goal": ["Detection","Classification"],
         "ImageType":"RGB" ,
+        "Link":"https://drive.google.com/drive/folders/1XlwoD8xes1punAzlGSz8mluQXm-CXcOJ",
         "References": [
             {"Article 01": "https://www.sciencedirect.com/science/article/pii/S2352914821001313"},
             {"Article 02": "https://www.mdpi.com/2624-7402/6/3/117"},
