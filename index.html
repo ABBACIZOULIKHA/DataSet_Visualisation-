@@ -6,291 +6,123 @@
   <title>Horizontal Bar Chart Visualization</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
-    /* General Body Styling */
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: linear-gradient(120deg, #f6f7f9, #eef2f3);
+      background-color: #f7f9fc;
       color: #333;
-      transition: background 0.3s ease, color 0.3s ease;
     }
-  
-    /* Dark Mode */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #121212;
-        color: #e0e0e0;
-      }
-  
-      h1 {
-        color: #bb86fc;
-      }
-  
-      .chart {
-        background: #333;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-      }
-  
-      .bar {
-        fill: #6200ea;
-      }
-  
-      .bar:hover {
-        fill: #bb86fc;
-      }
-  
-      .tooltip {
-        background: rgba(0, 0, 0, 0.8);
-        border: 1px solid #444;
-        color: #e0e0e0;
-      }
-  
-      .details {
-        background: #333;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-      }
-  
-      .details h3 {
-        color: #bb86fc;
-      }
-  
-      .details table th {
-        background: #444;
-        color: #bb86fc;
-      }
-  
-      .details table td {
-        background: #555;
-        color: #e0e0e0;
-      }
-  
-      .details .references h4 {
-        color: #bb86fc;
-      }
-  
-      .details .references ul li a {
-        color: #bb86fc;
-      }
-  
-      .details .references ul li a:hover {
-        text-decoration: underline;
-      }
-  
-      .x-axis text {
-        fill: #bbb;
-      }
-  
-      .y-axis text {
-        fill: #bbb;
-      }
-    }
-  
-    /* Title Styling */
+
     h1 {
-      font-size: 2.8em;
-      color: #4a90e2;
-      margin-top: 40px;
       text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 600;
-      transition: color 0.3s ease;
+      font-size: 2.5rem;
+      color: #4a90e2;
+      margin-top: 20px;
     }
-  
-    /* Chart Area Styling */
-    .chart {
-      margin: 40px auto;
-      padding: 30px;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-      max-width: 1100px;
-      width: 90%;
-      position: relative;
-      transition: background 0.3s ease;
-    }
-  
-    /* Bar Styling */
-    .bar {
-      fill: #4a90e2;
-      transition: fill 0.3s ease, transform 0.2s ease;
+
+    #dataset-select {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
       border-radius: 5px;
+      width: 200px;
+      background-color: #fff;
     }
-  
-    .bar:hover {
-      fill: #ff9800;
+
+    #chart {
+      margin: 30px auto;
+      max-width: 80%;
+      position: relative;
     }
-  
-    /* Tooltip Styling */
+
     .tooltip {
       position: absolute;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid #ddd;
-      padding: 12px;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
       pointer-events: none;
-      font-size: 14px;
-      color: #333;
-      max-width: 250px;
-      word-wrap: break-word;
-      transition: background 0.3s ease, color 0.3s ease;
+      font-size: 0.9rem;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 10;
     }
-  
-    /* Details Panel Styling */
+
+    .bar {
+      fill: #4a90e2;
+      transition: fill 0.2s, transform 0.2s;
+    }
+
+    .bar:hover {
+      fill: #ff9800;
+      transform: scale(1.02);
+    }
+
+    .x-axis path, .x-axis line, .y-axis path, .y-axis line {
+      stroke: #ccc;
+    }
+
     .details {
-      width: 80%;
-      max-width: 900px;
-      margin-top: 40px;
-      padding: 25px;
+      margin: 20px auto;
+      max-width: 80%;
+      background-color: #fff;
+      border: 1px solid #ddd;
       border-radius: 10px;
-      background: #ffffff;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-      text-align: left;
+      padding: 20px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
       display: none;
-      transition: background 0.3s ease;
     }
-  
-    /* Title inside Details Panel */
+
     .details h3 {
-      font-size: 1.6em;
-      color: #4a90e2;
-      font-weight: 600;
-      margin-bottom: 20px;
-      transition: color 0.3s ease;
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 15px;
     }
-  
-    /* Table Styling inside Details */
+
     .details table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
-      border-radius: 8px;
-      overflow: hidden;
     }
-  
-    .details table th,
-    .details table td {
-      border: 1px solid #ddd;
-      padding: 12px 18px;
+
+    .details th, .details td {
       text-align: left;
-      font-size: 14px;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
     }
-  
-    .details table th {
-      background: #f6f7f9;
-      color: #4a90e2;
-      font-weight: 500;
-    }
-  
-    .details table td {
-      background: #fff;
-      color: #555;
-    }
-  
-    /* References Section inside Details */
-    .details .references {
-      margin-top: 25px;
-    }
-  
-    .details .references h4 {
-      font-size: 1.4em;
-      color: #4a90e2;
-      margin-bottom: 15px;
-      transition: color 0.3s ease;
-    }
-  
+
     .details .references ul {
       padding-left: 20px;
-      margin-top: 10px;
     }
-  
-    .details .references ul li {
-      margin-bottom: 12px;
-      font-size: 14px;
-    }
-  
-    .details .references ul li a {
+
+    .details .references a {
       color: #4a90e2;
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
     }
-  
-    .details .references ul li a:hover {
+
+    .details .references a:hover {
       text-decoration: underline;
     }
-  
-    /* Styling for X-axis labels */
-    .x-axis text {
-      font-size: 14px;
-      fill: #555;
-      font-weight: 400;
-      transition: fill 0.3s ease;
-    }
-  
-    /* Styling for Y-axis labels */
-    .y-axis text {
-      font-size: 14px;
-      fill: #555;
-      font-weight: 400;
-      transition: fill 0.3s ease;
-    }
-  
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2em;
-        margin-top: 30px;
-      }
-  
-      .chart {
-        width: 100%;
-        margin: 20px;
-        padding: 20px;
-      }
-  
-      .details {
-        width: 90%;
-        padding: 20px;
-      }
-    }
-  
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8em;
-        margin-top: 20px;
-      }
-  
-      .chart {
-        width: 100%;
-        padding: 15px;
-      }
-  
-      .details {
-        padding: 15px;
-      }
-    }
   </style>
-  
 </head>
 <body>
   <h1>Dataset Citation Analysis</h1>
+
+  <!-- Dropdown for selecting Wheat Disease or Pest -->
+  <select id="dataset-select" onchange="loadData()">
+    <option value="wheat">Wheat Disease</option>
+    <option value="pest">Pest</option>
+  </select>
+
   <div id="chart" class="chart"></div>
-  <div id="tooltip" class="tooltip" style="opacity: 0;"></div>
-  <div id="details" class="details" style="display: none;"></div>
+  <div id="tooltip" class="tooltip"></div>
+  <div id="details" class="details"></div>
 
   <script>
-    // Dimensions and margins
     const margin = { top: 20, right: 30, bottom: 50, left: 200 };
     const width = 1000 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
-
-    // Create SVG container
     const svg = d3.select("#chart")
       .append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -301,11 +133,19 @@
     const tooltip = d3.select("#tooltip");
     const details = d3.select("#details");
 
-    // Load data from JSON file
-    d3.json("Data.json").then(data => {
+    function loadData() {
+      const selectedOption = document.getElementById("dataset-select").value;
+      const dataFile = selectedOption === "wheat" ? "Data.json" : "pests.json";
+
+      d3.json(dataFile).then(data => {
+        updateChart(data);
+      });
+    }
+
+    function updateChart(data) {
+      svg.selectAll("*").remove();
       const dataset = data.DiseaseClassification;
 
-      // Scales
       const y = d3.scaleBand()
         .domain(dataset.map(d => d.Dataset))
         .range([0, height])
@@ -316,18 +156,12 @@
         .nice()
         .range([0, width]);
 
-      // Y-axis
-      svg.append("g")
-        .attr("class", "y-axis")
-        .call(d3.axisLeft(y));
-
-      // X-axis
+      svg.append("g").attr("class", "y-axis").call(d3.axisLeft(y));
       svg.append("g")
         .attr("class", "x-axis")
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x));
 
-      // Bars
       svg.selectAll(".bar")
         .data(dataset)
         .enter()
@@ -356,41 +190,31 @@
         .on("click", function (event, d) {
           details.style("display", "block");
           const references = d.References?.map(ref => {
-    const articleLink = Object.values(ref)[0]; // Extracts the value (URL)
-    return `<li><a href="${articleLink}" target="_blank">${articleLink}</a></li>`; }).join("") || "N/A";
+            const articleLink = Object.values(ref)[0];
+            return `<li><a href="${articleLink}" target="_blank">${articleLink}</a></li>`;
+          }).join("") || "N/A";
+
           details.html(
-            `<h3>${d.Dataset}</h3>` +
-            `<table>
+            `<h3>${d.Dataset}</h3>
+            <table>
               <tr><th>Key</th><th>Value</th></tr>
               <tr><td>Size</td><td>${d.Size || "N/A"}</td></tr>
-              <tr><td>Link</td><td><a href = "${d.Link || "N/A"}">${d.Link || "N/A"}</a></td></tr>
+              <tr><td>Link</td><td><a href="${d.Link || "N/A"}">${d.Link || "N/A"}</a></td></tr>
               <tr><td>Number of Citations</td><td>${d.NbCitations}</td></tr>
               <tr><td>Goals</td><td>${Array.isArray(d.Goal) ? d.Goal.join(", ") : d.Goal || "N/A"}</td></tr>
               <tr><td>Country</td><td>${d.Country || "N/A"}</td></tr>
               <tr><td>Classes</td><td>${typeof d.Classes === "object" ? Object.entries(d.Classes).map(([key, value]) => `${key}: ${value}`).join("<br>") : d.Classes || "N/A"}</td></tr>
               <tr><td>Source</td><td>${d.Source || "N/A"}</td></tr>
-            </table>` +
-            `<div class="references">
+            </table>
+            <div class="references">
               <h4>References</h4>
               <ul>${references}</ul>
             </div>`
           );
         });
+    }
 
-      // Labels
-      svg.selectAll(".label")
-        .data(dataset)
-        .enter()
-        .append("text")
-        .attr("class", "label")
-        .attr("y", d => y(d.Dataset) + y.bandwidth() / 2)
-        .attr("x", d => x(d.NbCitations) + 5)
-        .attr("text-anchor", "start")
-        .attr("alignment-baseline", "middle")
-        .text(d => d.NbCitations);
-    }).catch(error => {
-      console.error("Error loading the data: ", error);
-    });
+    loadData();
   </script>
 </body>
 </html>
